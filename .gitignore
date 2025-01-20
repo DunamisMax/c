@@ -4,6 +4,9 @@
 # youtube
 youtube
 
+# AI Prompt:
+prompt.md
+
 # Object files
 *.o
 *.ko
