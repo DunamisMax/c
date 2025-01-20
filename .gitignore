@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# youtube
+youtube
+
 # Object files
 *.o
 *.ko
