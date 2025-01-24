@@ -26,7 +26,7 @@ Welcome to my C programming learning repository! This repository is a collection
 
 ## 🌐 Connect with Me
 
-- **🐙 GitHub**: [DunamisMax](https://github.com/DunamisMax/c)
+- **🐙 GitHub**: [DunamisMax](https://github.com/dunamismax/c)
 - **🌌 Bluesky**: [dunamismax](https://bsky.app/profile/dunamismax.bsky.social)
 
 ---
@@ -36,7 +36,7 @@ Welcome to my C programming learning repository! This repository is a collection
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/DunamisMax/c.git
+   git clone https://github.com/dunamismax/c.git
    ```
 
 2. Navigate to the specific program or project directory.
