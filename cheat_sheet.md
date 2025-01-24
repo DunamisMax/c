@@ -1,243 +1,549 @@
-# C Programming Language Guide
+# C Programming Cheat Sheet
 
-## Basic Program Structure
+A concise and comprehensive reference for C programming, covering essential concepts, syntax, and examples.
 
-Every C program follows this basic structure:
+---
+
+## Table of Contents
+
+1. [Basic Structure](#basic-structure)
+2. [Data Types & Variables](#data-types--variables)
+3. [Operators](#operators)
+4. [Control Structures](#control-structures)
+5. [Functions](#functions)
+6. [Pointers](#pointers)
+7. [Arrays & Strings](#arrays--strings)
+8. [Structures & Unions](#structures--unions)
+9. [Dynamic Memory Allocation](#dynamic-memory-allocation)
+10. [File I/O](#file-io)
+11. [Preprocessor Directives](#preprocessor-directives)
+12. [Common Standard Library Functions](#common-standard-library-functions)
+13. [Tips & Best Practices](#tips--best-practices)
+
+---
+
+## Basic Structure
 
 ```c
-/* Include necessary header files */
-#include <stdio.h>  // For input/output functions
-#include <stdlib.h> // For memory allocation, process control
+#include <stdio.h>
 
-/* Main function - program execution starts here */
-int main(void) {
-    // Your code goes here
+// Function declarations
+int main() {
+    // Variable declarations
     printf("Hello, World!\n");
-    return 0;  // Return 0 indicates successful execution
+    return 0;
 }
 ```
 
-## Data Types and Variables
+- **`#include <stdio.h>`**: Includes the Standard Input Output library.
+- **`main()`**: Entry point of a C program.
+- **`printf`**: Function to print output to the console.
+- **`return 0;`**: Indicates successful termination.
 
-C provides several fundamental data types:
+---
 
-```c
-/* Integer types */
-int number = 42;           // Usually 4 bytes (-2,147,483,648 to 2,147,483,647)
-short smallNumber = 123;   // Usually 2 bytes (-32,768 to 32,767)
-long bigNumber = 123456L;  // At least 4 bytes
-unsigned int positive = 100u; // Only positive numbers
+## Data Types & Variables
 
-/* Floating point types */
-float decimal = 3.14f;     // Single precision
-double precise = 3.14159;  // Double precision
+| Data Type          | Description                             | Example        |
+|--------------------|-----------------------------------------|----------------|
+| `int`              | Integer                                 | `int a = 10;`   |
+| `float`            | Single-precision floating point         | `float f = 3.14;`|
+| `double`           | Double-precision floating point         | `double d = 3.1415;`|
+| `char`             | Character                               | `char c = 'A';` |
+| `void`             | No type                                 | `void func();` |
+| Derived Types      | Arrays, Pointers, Structures, Unions    | `int arr[5];`  |
+| Enumerations       | User-defined type with named constants  | `enum Days {Sun, Mon, ...};`|
+| `typedef`          | Create alias for types                  | `typedef unsigned long ulong;`|
 
-/* Character type */
-char letter = 'A';         // Single character or small integer
+---
 
-/* Boolean type (C99 and later) */
-#include <stdbool.h>
-bool isTrue = true;        // true or false
+## Operators
 
-/* Constants */
-const int FIXED = 100;     // Value cannot be changed
-#define MAX_SIZE 1000      // Preprocessor constant
-```
+| Operator            | Description                                 | Example             |
+|---------------------|---------------------------------------------|---------------------|
+| Arithmetic          | `+`, `-`, `*`, `/`, `%`                     | `a + b`             |
+| Relational          | `==`, `!=`, `>`, `<`, `>=`, `<=`            | `a > b`             |
+| Logical             | `&&`, `||`,`!`                              | `a && b`            |
+| Bitwise             | `&`, `|`,`^`,`~`,`<<`,`>>`                  | `a & b`             |
+| Assignment          | `=`, `+=`, `-=`, `*=`, `/=`, `%=`           | `a += b`            |
+| Increment/Decrement | `++`, `--`                                  | `a++`               |
+| Ternary             | `?:`                                        | `a > b ? a : b`     |
+| Sizeof             | `sizeof()`                                   | `sizeof(int)`       |
+| Comma               | `,`                                         | `a = (b, c)`        |
+| Pointer Dereference | `*`, `->`                                   | `*ptr`, `ptr->field`|
+
+---
 
 ## Control Structures
 
 ### Conditional Statements
 
 ```c
-/* If-else statement */
-if (x > 0) {
-    printf("Positive\n");
-} else if (x < 0) {
-    printf("Negative\n");
+// If-Else
+if (condition) {
+    // code
+} else if (another_condition) {
+    // code
 } else {
-    printf("Zero\n");
+    // code
 }
 
-/* Switch statement */
-switch (grade) {
-    case 'A':
-        printf("Excellent!\n");
+// Switch
+switch (expression) {
+    case constant1:
+        // code
         break;
-    case 'B':
-        printf("Good!\n");
+    case constant2:
+        // code
         break;
     default:
-        printf("Unknown grade\n");
+        // code
 }
 ```
 
 ### Loops
 
 ```c
-/* For loop */
+// For Loop
 for (int i = 0; i < 10; i++) {
-    printf("%d ", i);
+    // code
 }
 
-/* While loop */
-int count = 0;
-while (count < 5) {
-    printf("%d ", count);
-    count++;
+// While Loop
+while (condition) {
+    // code
 }
 
-/* Do-while loop */
+// Do-While Loop
 do {
-    printf("At least once\n");
-} while (false);
-
-/* Break and continue */
-for (int i = 0; i < 10; i++) {
-    if (i == 5) continue;  // Skip iteration
-    if (i == 8) break;     // Exit loop
-    printf("%d ", i);
-}
+    // code
+} while (condition);
 ```
+
+### Jump Statements
+
+```c
+break;   // Exit loop or switch
+continue; // Skip to next iteration
+return;   // Exit function
+goto label; // Jump to label
+```
+
+---
 
 ## Functions
 
-```c
-/* Function declaration (prototype) */
-int add(int a, int b);  // Declare before using
+### Declaration & Definition
 
-/* Function definition */
+```c
+// Declaration
+int add(int a, int b);
+
+// Definition
 int add(int a, int b) {
     return a + b;
 }
+```
 
-/* Function with pointer parameters */
-void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
+### Function Call
 
-/* Variable arguments */
-#include <stdarg.h>
-int sum(int count, ...) {
-    va_list args;
-    va_start(args, count);
+```c
+int result = add(5, 3);
+```
 
-    int total = 0;
-    for (int i = 0; i < count; i++) {
-        total += va_arg(args, int);
-    }
+### Recursion Example
 
-    va_end(args);
-    return total;
+```c
+int factorial(int n) {
+    if (n <= 1)
+        return 1;
+    else
+        return n * factorial(n - 1);
 }
 ```
 
-## Arrays and Strings
+### Function Pointers
 
 ```c
-/* Array declaration and initialization */
-int numbers[5] = {1, 2, 3, 4, 5};
-int matrix[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
+// Declaration
+int (*funcPtr)(int, int);
 
-/* String (character array) */
-char greeting[] = "Hello";  // Null-terminated string
-char name[20];             // Fixed-size array for string
+// Assignment
+funcPtr = &add;
 
-/* String functions */
-#include <string.h>
-strlen(greeting);          // String length
-strcpy(name, greeting);    // String copy
-strcat(name, " World");    // String concatenation
-strcmp(str1, str2);        // String comparison
+// Usage
+int sum = funcPtr(2, 3);
 ```
 
-## Pointers and Memory Management
+---
+
+## Pointers
+
+### Basics
 
 ```c
-/* Pointer declaration and usage */
-int x = 10;
-int *ptr = &x;            // ptr holds address of x
-printf("%d", *ptr);       // Dereferencing - prints 10
-
-/* Dynamic memory allocation */
-int *array = (int *)malloc(5 * sizeof(int));  // Allocate memory
-if (array != NULL) {
-    // Use memory
-    array[0] = 1;
-
-    // Always free when done
-    free(array);
-    array = NULL;  // Good practice
-}
-
-/* Array of pointers */
-char *words[] = {"Hello", "World"};
-
-/* Function pointers */
-int (*operation)(int, int);  // Function pointer declaration
-operation = add;             // Assign function address
-int result = operation(5, 3); // Call through pointer
+int a = 10;
+int *p = &a; // Pointer to integer
 ```
 
-## Structures and Unions
+### Dereferencing
 
 ```c
-/* Structure definition */
+int value = *p; // Access value at address p
+*p = 20;        // Modify value at address p
+```
+
+### Pointer Arithmetic
+
+```c
+p++; // Moves to next integer location
+p--; // Moves to previous integer location
+```
+
+### Pointers and Arrays
+
+```c
+int arr[5] = {1, 2, 3, 4, 5};
+int *p = arr; // Points to first element
+
+// Accessing elements
+int first = *p;
+int second = *(p + 1);
+```
+
+### Pointers to Pointers
+
+```c
+int **pp = &p;
+```
+
+---
+
+## Arrays & Strings
+
+### Arrays
+
+```c
+// Declaration
+int numbers[10];
+char letters[26];
+
+// Initialization
+int primes[5] = {2, 3, 5, 7, 11};
+```
+
+### Multidimensional Arrays
+
+```c
+int matrix[3][3] = {
+    {1,2,3},
+    {4,5,6},
+    {7,8,9}
+};
+```
+
+### Strings
+
+```c
+char str1[] = "Hello";
+char str2[6] = {'H', 'e', 'l', 'l', 'o', '\0'};
+```
+
+### Common String Functions
+
+| Function       | Description                          | Example                  |
+|----------------|--------------------------------------|--------------------------|
+| `strlen`       | Get string length                    | `strlen(str)`            |
+| `strcpy`       | Copy string                          | `strcpy(dest, src)`      |
+| `strcat`       | Concatenate strings                  | `strcat(str1, str2)`     |
+| `strcmp`       | Compare two strings                   | `strcmp(str1, str2)`     |
+| `strchr`       | Locate character in string           | `strchr(str, 'a')`       |
+| `strstr`       | Locate substring in string           | `strstr(str, "sub")`     |
+
+---
+
+## Structures & Unions
+
+### Structures
+
+```c
 struct Person {
     char name[50];
     int age;
     float height;
 };
 
-/* Structure usage */
-struct Person person1 = {"John", 25, 1.75};
-struct Person *ptr = &person1;
-printf("%s", ptr->name);  // Arrow operator for pointer
+// Declaration
+struct Person p1;
 
-/* Union (shared memory) */
+// Initialization
+struct Person p2 = {"Alice", 30, 5.5};
+
+// Accessing members
+p1.age = 25;
+```
+
+### Nested Structures
+
+```c
+struct Address {
+    char city[50];
+    char country[50];
+};
+
+struct Employee {
+    char name[50];
+    struct Address address;
+};
+```
+
+### Unions
+
+```c
 union Data {
     int i;
     float f;
     char str[20];
 };
+
+// Usage
+union Data data;
+data.i = 10;
+data.f = 220.5; // Overwrites i
 ```
 
-## File Operations
+### Typedef with Structures
 
 ```c
-/* File handling */
-FILE *file = fopen("data.txt", "r");  // Open for reading
-if (file != NULL) {
-    char buffer[100];
-    while (fgets(buffer, sizeof(buffer), file)) {
-        printf("%s", buffer);
-    }
-    fclose(file);
+typedef struct {
+    char name[50];
+    int id;
+} Student;
+
+Student s1;
+```
+
+---
+
+## Dynamic Memory Allocation
+
+### `malloc` and `free`
+
+```c
+#include <stdlib.h>
+
+// Allocate memory
+int *ptr = (int *)malloc(5 * sizeof(int));
+if (ptr == NULL) {
+    // Handle memory allocation failure
 }
 
-/* Binary file operations */
-FILE *binFile = fopen("data.bin", "wb");  // Open for binary writing
-if (binFile != NULL) {
-    int numbers[] = {1, 2, 3, 4, 5};
-    fwrite(numbers, sizeof(int), 5, binFile);
-    fclose(binFile);
+// Use memory
+ptr[0] = 10;
+
+// Free memory
+free(ptr);
+```
+
+### `calloc`
+
+```c
+int *ptr = (int *)calloc(5, sizeof(int));
+```
+
+### `realloc`
+
+```c
+ptr = (int *)realloc(ptr, 10 * sizeof(int));
+```
+
+---
+
+## File I/O
+
+### Opening and Closing Files
+
+```c
+#include <stdio.h>
+
+FILE *fp = fopen("file.txt", "r"); // Modes: "r", "w", "a", "r+", etc.
+if (fp == NULL) {
+    // Handle error
+}
+
+// Close file
+fclose(fp);
+```
+
+### Reading from a File
+
+```c
+char buffer[100];
+while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+    printf("%s", buffer);
 }
 ```
 
-## Error Handling
+### Writing to a File
 
 ```c
-/* Error handling with errno */
-#include <errno.h>
+fprintf(fp, "Name: %s, Age: %d\n", name, age);
+```
+
+### Binary File I/O
+
+```c
+// Writing
+fwrite(&data, sizeof(data), 1, fp);
+
+// Reading
+fread(&data, sizeof(data), 1, fp);
+```
+
+---
+
+## Preprocessor Directives
+
+### Macros
+
+```c
+#define PI 3.14159
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+```
+
+### Conditional Compilation
+
+```c
+#ifdef DEBUG
+    printf("Debug mode\n");
+#endif
+
+#ifndef PI
+    #define PI 3.14159
+#endif
+
+#if defined(WIN32) || defined(_WIN32)
+    // Windows-specific code
+#endif
+```
+
+### Include Guards
+
+```c
+#ifndef HEADER_FILE_H
+#define HEADER_FILE_H
+
+// Header content
+
+#endif // HEADER_FILE_H
+```
+
+---
+
+## Common Standard Library Functions
+
+### Input/Output
+
+| Function         | Description                          | Example                          |
+|------------------|--------------------------------------|----------------------------------|
+| `printf`         | Print to stdout                      | `printf("Hello %s", name);`      |
+| `scanf`          | Read from stdin                      | `scanf("%d", &age);`             |
+| `fopen`          | Open a file                          | `fopen("file.txt", "r");`        |
+| `fclose`         | Close a file                         | `fclose(fp);`                    |
+| `fread`          | Read from a file                     | `fread(&data, sizeof(data), 1, fp);`|
+| `fwrite`         | Write to a file                      | `fwrite(&data, sizeof(data), 1, fp);`|
+| `fgets`          | Read a string from a file            | `fgets(buffer, 100, fp);`        |
+| `fputs`          | Write a string to a file             | `fputs("Hello", fp);`            |
+
+### String Manipulation
+
+| Function       | Description                          | Example                  |
+|----------------|--------------------------------------|--------------------------|
+| `strlen`       | Get length of string                 | `strlen(str)`            |
+| `strcpy`       | Copy string                          | `strcpy(dest, src)`      |
+| `strncpy`      | Copy n characters of string          | `strncpy(dest, src, n)`  |
+| `strcat`       | Concatenate strings                  | `strcat(str1, str2)`     |
+| `strcmp`       | Compare two strings                  | `strcmp(str1, str2)`     |
+| `strchr`       | Locate character in string           | `strchr(str, 'a')`       |
+| `strstr`       | Locate substring in string           | `strstr(str, "sub")`     |
+
+### Memory Management
+
+| Function     | Description                          | Example                      |
+|--------------|--------------------------------------|------------------------------|
+| `malloc`     | Allocate memory                      | `malloc(sizeof(int) * 5)`    |
+| `calloc`     | Allocate and zero-initialize memory  | `calloc(5, sizeof(int))`     |
+| `realloc`    | Reallocate memory                    | `realloc(ptr, new_size)`     |
+| `free`       | Free allocated memory                | `free(ptr)`                  |
+
+### Miscellaneous
+
+| Function      | Description                          | Example                          |
+|---------------|--------------------------------------|----------------------------------|
+| `exit`        | Terminate program                    | `exit(0);`                       |
+| `atoi`        | Convert string to integer            | `int num = atoi("123");`         |
+| `atof`        | Convert string to float              | `float f = atof("3.14");`        |
+| `sprintf`     | Print to string                      | `sprintf(str, "Num: %d", num);`  |
+| `sscanf`      | Read formatted input from string     | `sscanf(str, "%d", &num);`       |
+
+---
+
+## Tips & Best Practices
+
+- **Use Meaningful Variable Names**: Enhances code readability.
+  
+- **Initialize Variables**: Prevents undefined behavior.
+  
+- **Check Return Values**: Always verify the success of functions like `malloc`, `fopen`, etc.
+  
+- **Avoid Magic Numbers**: Use `#define` or `const` for constants.
+  
+- **Modular Code**: Break code into functions for reusability and clarity.
+  
+- **Memory Management**: Ensure every `malloc`/`calloc` has a corresponding `free` to prevent memory leaks.
+  
+- **Use `const` Correctly**: Protects variables from unintended modifications.
+  
+- **Comment Wisely**: Explain the why, not the what.
+  
+- **Consistent Indentation**: Improves code structure and readability.
+  
+- **Limit Global Variables**: Prefer local variables to reduce dependencies and side-effects.
+
+---
+
+## Example: Simple C Program
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-FILE *file = fopen("nonexistent.txt", "r");
-if (file == NULL) {
-    printf("Error: %s\n", strerror(errno));
+// Function to compute factorial
+unsigned long factorial(unsigned int n) {
+    if (n == 0)
+        return 1;
+    else
+        return n * factorial(n - 1);
 }
 
-/* Assert for debugging */
-#include <assert.h>
-assert(ptr != NULL);  // Terminates if condition is false
+int main() {
+    char name[50];
+    unsigned int num;
+    
+    printf("Enter your name: ");
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = '\0'; // Remove newline
+
+    printf("Hello, %s!\n", name);
+
+    printf("Enter a number to compute its factorial: ");
+    if (scanf("%u", &num) != 1) {
+        printf("Invalid input.\n");
+        return 1;
+    }
+
+    printf("Factorial of %u is %lu\n", num, factorial(num));
+    return 0;
+}
 ```
